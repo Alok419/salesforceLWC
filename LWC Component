@@ -610,7 +610,7 @@ if (this.selectedProductCount > 0) {
     });
 
 } else {
-  //  this.showNext = false;
+  
     
 }
 console.log('Selected ID-----------'+this.selectedProductsIds);
@@ -621,114 +621,7 @@ console.log('Selected ID-----------'+this.selectedProductsIds);
 }
 
 
-// handleRowSelection1(event) {
-//     try {
-//         console.log('event.detail' + event.detail.config.action);
-//         this.selectedProductsIds1=[];
-//     if (event.detail.config.action == 'rowSelect') {
-//         const selectedRows = event.detail.selectedRows;
-//         console.log('selectedRows1.....'+selectedRows);
-//         console.log('selectedRows.Id ' + JSON.stringify(selectedRows));
-//         const selectedRec = [];
-//         const holdData = [...this.selectedRecords1, ...selectedRows];
-//         this.selectedRecords1 = [...new Set(holdData.map(({ Id }) => Id))].map(e => holdData.find(({ Id }) => Id == e));
-//         console.log('selectedRecords1 :' + JSON.stringify(this.selectedRecords1));
-//     } else if (event.detail.config.action == 'rowDeselect') {
-//         let deselectedId = event.detail.config.value;
-//         console.log('Removed selectedRecords1 Id :' + event.detail.config.value);
-//         let recordIndex = this.selectedRecords1.findIndex((record) => record.Id == deselectedId);
-//         this.selectedRecords1.splice(recordIndex, 1);
-//         this.selectedRecords1 = [...this.selectedRecords1];
-//         console.log('Removed selectedRecords1 :' + JSON.stringify(this.selectedRecords1));
-//     }
-//     this.selectedProductCount = this.selectedRecords1.length;
-//     console.log(' this.selectedProductCount.....'+ this.selectedProductCount);
-    
-//     if (this.selectedProductCount > 0) {
-//         var srNo = 1;
-//         let baseURL = window.location.origin;
-        
-//         this.selectedRecords1.forEach(currentItem => {
-//             this.selectedProductsIds1.push(currentItem.Id);
-//             currentItem.recordUrl = baseURL + '/' + currentItem.Id;
-//             this.showNext = true;
-//             currentItem.rowNumber = srNo;
-//             srNo++;
-           
-                
-            
-    
-//         });
-    
-//     } else {
-//       //  this.showNext = false;
-        
-//     }
-//     console.log('Selected ID-----------'+this.selectedProductsIds1);
-//     } catch (error) {
-//         console.log(error); 
-//     }
-    
-//     }
 
-    
-    
-// handleRowSelection2(event) {
-//     try {
-//         console.log('event.detail' + event.detail.config.action);
-//         this.selectedProductsIds2=[];
-//     if (event.detail.config.action == 'rowSelect') {
-//         const selectedRows = event.detail.selectedRows;
-//         console.log('selectedRows1.....'+selectedRows);
-//         console.log('selectedRows.Id ' + JSON.stringify(selectedRows));
-//         const selectedRec = [];
-//         const holdData = [...this.selectedRecords2, ...selectedRows];
-//         this.selectedRecords2 = [...new Set(holdData.map(({ Id }) => Id))].map(e => holdData.find(({ Id }) => Id == e));
-//         console.log('selectedRecords2 :' + JSON.stringify(this.selectedRecords2));
-//     } else if (event.detail.config.action == 'rowDeselect') {
-//         let deselectedId = event.detail.config.value;
-//         console.log('Removed selectedRecords2 Id :' + event.detail.config.value);
-//         let recordIndex = this.selectedRecords2.findIndex((record) => record.Id == deselectedId);
-//         this.selectedRecords2.splice(recordIndex, 1);
-//         this.selectedRecords2 = [...this.selectedRecords2];
-//         console.log('Removed selectedRecords2 :' + JSON.stringify(this.selectedRecords2));
-//     }
-//     this.selectedProductCount = this.selectedRecords2.length;
-//     console.log(' this.selectedProductCount.....'+ this.selectedProductCount);
-    
-//     if (this.selectedProductCount > 0) {
-//         var srNo = 1;
-//         let baseURL = window.location.origin;
-        
-//         this.selectedRecords2.forEach(currentItem => {
-//             this.selectedProductsIds2.push(currentItem.Id);
-//             currentItem.recordUrl = baseURL + '/' + currentItem.Id;
-//             this.showNext = true;
-//             currentItem.rowNumber = srNo;
-//             srNo++;
-           
-                
-            
-    
-//         });
-    
-//     } else {
-//       //  this.showNext = false;
-        
-//     }
-//     console.log('Selected ID-----------'+this.selectedProductsIds2);
-//     } catch (error) {
-//         console.log(error); 
-//     }
-    
-//     }
-    
-
-//     handleSaveAll(){
-//     handleSave();
-//     handleSave1();
-//     handleSave2();
-// }
 
 handleSave() {
     try{
@@ -763,17 +656,7 @@ handleSave() {
     let lastIndex = this.selectedRecords.length;
     let bypass = false;
     console.log(" Selected data ---------------------" +JSON.stringify(this.selectedRecords) );
-   // console.log('this.selectedRecords.Name...' + this.selectedRecords.Name);
-    //console.log('this.selectedRecords.ListPrice...' + this.selectedRecords.List_Price__c);
-    // for (let i = 0; i < lastIndex; i++) {
-    //     let rowNumber = i + 1;
-    //     if (this.selectedRecords[i].Quantity == null || this.selectedRecords[i].Quantity == '') {
-    //         this.toastEvent('error', 'Error!', 'Please fill Quantity at row number .' + rowNumber);
-    //         bypass = true;
-    //         break;
-    //     }
-       
-    // }
+   
     console.log('save data' + JSON.stringify(this.selectedRecords));
     if (!bypass) {
         this.isLoading = true;
@@ -794,7 +677,7 @@ handleSave() {
                     this.dispatchEvent(new CloseActionScreenEvent());
     
     
-                    //refreshApex(this.fetchQuoteLineItem);
+                    
                 }
     
                
@@ -815,8 +698,7 @@ handleSave() {
 
 
 
-} 
-
+}
 
 Class-------------------------------------------------
 public with sharing class AddBooksController {

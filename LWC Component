@@ -1,0 +1,902 @@
+HTML ----------------------------------------------------------
+<template>
+    
+    <div style="border: 1px black solid;">
+    <lightning-card>
+         
+        <span class="slds-text-align_center" >
+            <h1 style="font-size: 2em;">Select Books</h1>
+            <hr>
+            <div class="slds-text-align_left" style=" font-size: 1.5em;margin-left: 20px; " >
+                Account Name :{acountName}  
+            </div>
+        </span>
+        <div>
+        <span class="slds-m-left_x-large">
+            <lightning-combobox
+                name="Select Books"
+                value={value}
+                placeholder="Select Category"
+                options={options}
+                style=" text-align: left; margin-left: 20px;margin-right: 20px; margin-top: 10px;"
+                onchange={handleChange} ></lightning-combobox>
+        </span>
+    
+
+     <div  if:true={v1} class="slds-m-around_small">
+         <div class="slds-section slds-is-open " data-id={id}>
+            <h3 class="slds-section__title main ">
+                <span aria-label={category}></span>
+                <button type="button" aria-controls={id}  class="slds-button slds-section__title-action " data-buttonid={id}
+                    onclick={toggleChoiceA}>
+                    <span style="width:100%" class="slds-truncate slds-text-heading_small " title={label}>{label}</span>
+                    <lightning-icon icon-name="utility:switch" alternative-text="button icon" size="x-small"
+                    class="slds-section__title-action-icon " value={category} >
+                </lightning-icon>
+    
+                </button>
+                
+            </h3>
+            <div class="slds-section__content">
+                <slot>
+                    <lightning-datatable  show-row-number-column key-field="Id" data={data} columns={columns} onrowselection={handleRowSelection}
+             selected-rows={selectedProductsIds}> 
+        </lightning-datatable>
+                </slot>
+            </div>
+        </div>
+        
+    </div> 
+</div>
+<div>
+    <span class="slds-m-left_x-large">
+        <lightning-combobox
+            name="Select Books"
+            value={value}
+            placeholder="Select Category"
+            options={options1}
+            style=" text-align: left; margin-left: 20px;margin-right: 20px;"
+            onchange={handleChange1} ></lightning-combobox>
+    </span>
+
+    <div if:true={v2} class="slds-m-around_small">
+        <div class="slds-section slds-is-open " data-id1={id}>
+            <h3 class="slds-section__title main ">
+                
+                <button type="button" aria-controls={id}  class="slds-button slds-section__title-action " data-buttonid1={id}
+                    onclick={toggleChoiceB}>
+                    <span style="width:100%" class="slds-truncate slds-text-heading_small " title={label}>{label}</span>
+                    <lightning-icon icon-name="utility:switch" alternative-text="button icon" size="x-small"
+                    class="slds-section__title-action-icon ">
+                </lightning-icon>
+    
+                </button>
+                
+            </h3>
+            <div class="slds-section__content">
+                <slot>
+                    <lightning-datatable  show-row-number-column key-field="Id" data={data1} columns={columns1} onrowselection={handleRowSelection}
+             selected-rows={selectedProductsIds}>
+        </lightning-datatable>
+                </slot>
+            </div>
+        </div>
+        
+    </div>
+</div>
+  
+<div>
+    <span class="slds-m-left_x-large">
+        <lightning-combobox
+            name="Select Books"
+            value={value}
+            placeholder="Select Category"
+            options={options2}
+            style=" text-align: left; margin-left: 20px;margin-right: 20px;"
+            onchange={handleChange2} ></lightning-combobox>
+    </span>
+
+    <div  if:true={v3} class="slds-m-around_small">
+        <div class="slds-section slds-is-open " data-id2={id}>
+            <h3 class="slds-section__title main ">
+                
+                <button type="button" aria-controls={id}  class="slds-button slds-section__title-action " data-buttonid2={id}
+                    onclick={toggleChoiceC}>
+                    <span style="width:100%" class="slds-truncate slds-text-heading_small " title={label}>{label}</span>
+                    <lightning-icon icon-name="utility:switch" alternative-text="button icon" size="x-small"
+                    class="slds-section__title-action-icon ">
+                </lightning-icon>
+    
+                </button>
+                
+            </h3>
+            <div class="slds-section__content">
+                <slot>
+                    <lightning-datatable  show-row-number-column key-field="Id" data={data2} columns={columns2} onrowselection={handleRowSelection}
+             selected-rows={selectedProductsIds}>
+        </lightning-datatable>
+                </slot>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+ 
+    </lightning-card>
+
+    
+    <hr>
+
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="4" padding="around-small" flexibility="auto">
+                        <span  >
+                            <b>#Total Books :</b> {noOftotalBook}                     </span>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="4" padding="around-small" flexibility="auto">
+                    <span  >
+                        <b>#Selected Books :</b> {noOfselectedBook}                    </span>
+        </lightning-layout-item>
+         <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="4" padding="around-small" flexibility="auto">
+            <span  >
+                <b>#Remaining Books :</b>{noOfRemainingBook}            </span>
+</lightning-layout-item>
+         </lightning-layout>
+
+    <!-- <div class="slds-grid slds-gutters" style="margin-left: 30px;margin-right: 30px; margin-bottom: 20px;margin-top: 30px; ">
+        <span class="slds-text-heading_small slds-col">
+            <b>#Total Books :</b> {noOftotalBook}     
+        </span> 
+        <span  class="slds-text-heading_small slds-col">
+            <b>#Selected Books :</b> {noOfselectedBook}
+        </span>
+        <span  class="slds-text-heading_small slds-col">
+            <b>#Remaining Books :</b>{noOfRemainingBook}
+        </span>
+    </div> -->
+    <hr>
+
+    <div >
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                            <span  >
+                            <lightning-input type="text" placeholder="पुस्तक कहा से लेते है" style="width: 250px;" onchange={handle1}></lightning-input>
+                        </span>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                        <span  >
+                            <lightning-input type="text" placeholder="वर्तमान में किस प्रकाशन की पुस्तक चलते है" style="width: 250px;"  onchange={handle2}></lightning-input>
+                        </span>
+            </lightning-layout-item>
+             </lightning-layout>
+
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                                <span  >
+                                    <lightning-input type="text" placeholder="वापसी योग्य/अयोग्य" style="width: 250px;"   onchange={handle3}></lightning-input>
+                                </span>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                            <span  >
+                                <lightning-input type="text" placeholder="मोबाइल नंबर" style="width: 250px;"  onchange={handle4}></lightning-input>
+                            </span>
+                </lightning-layout-item>
+             
+                </lightning-layout>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                                    <span  >
+                                        <lightning-input type="text" placeholder="प्रचार्य का नाम" style="width: 250px;"  onchange={handle5}></lightning-input>
+                                    </span>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                                <span  >
+                                    <lightning-input type="text" placeholder="कमीशन" style="width: 250px;"  onchange={handle6}></lightning-input>
+                                </span>
+                    </lightning-layout-item>
+                   
+                    </lightning-layout>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                                        <span  >
+                                            <lightning-input type="text" placeholder="ऑर्डर हेतु कब आना है" style="width: 250px;"   onchange={handle7}></lightning-input>
+                                        </span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small" flexibility="auto">
+                                    <span  >
+                                        <lightning-input type="text" placeholder="किताबे कब निर्दरित की जाती है" style="width: 250px;"  onchange={handle8}></lightning-input>
+                                    </span>
+                        </lightning-layout-item>
+                        
+                        </lightning-layout>
+
+        <!-- <div class="slds-grid slds-gutters">
+            <span class="slds-col"> 
+                <lightning-input type="text" placeholder="वापसी योग्य/अयोग्य" style="width: 300px;"   onchange={handle3}></lightning-input>
+            </span>
+
+            <span class="slds-col">
+                <lightning-input type="text" placeholder="मोबाइल नंबर" style="width: 300px;"  onchange={handle4}></lightning-input>
+            </span>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <span class="slds-col">
+                <lightning-input type="text" placeholder="प्रचार्य का नाम" style="width: 300px;"  onchange={handle5}></lightning-input>
+            </span>
+            <span class="slds-col">
+                <lightning-input type="text" placeholder="कमीशन" style="width: 300px;"  onchange={handle6}></lightning-input>
+            </span>
+        
+        </div>
+        <div class="slds-grid slds-gutters">
+            <span class="slds-col">
+                <lightning-input type="text" placeholder="ऑर्डर हेतु कब आना है" style="width: 300px;"   onchange={handle7}></lightning-input>
+            </span>
+            <span class="slds-col">
+                <lightning-input type="text" placeholder="किताबे कब निर्दरित की जाती है" style="width: 300px;"  onchange={handle8}></lightning-input>
+            </span>
+        
+        </div> -->
+    </div>
+    <footer class="slds-modal__footer">
+        
+        <lightning-button variant="Brand" onclick={handleSave} name="next" label="Save">
+        </lightning-button> &nbsp;
+    &nbsp;
+    <lightning-button onclick={handleFirstCancel} name="firstcancel" label="Cancel">
+    </lightning-button>
+</footer>
+</div>
+</template>
+
+
+
+
+JS------------------------------------------------------------
+import { LightningElement,api,wire,track } from 'lwc';
+import addBooks from '@salesforce/apex/AddBooksController.addBooks';
+import getBooks from '@salesforce/apex/AddBooksController.getBooks';
+import getBooksLen from '@salesforce/apex/AddBooksController.getBooksLen';
+import addOrderProducts from '@salesforce/apex/AddBooksController.addOrderProducts';
+
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { CloseActionScreenEvent } from 'lightning/actions';
+import {CurrentPageReference} from 'lightning/navigation';
+
+const columns = [
+    { label: 'Code', fieldName: 'productCode' , type: 'Text', hideDefaultActions: true, wrapText: true},
+    { label: 'Book', fieldName: 'proName', type: 'Text' ,hideDefaultActions: true, wrapText: true},
+   
+];
+
+const columns1 = [
+    { label: 'Code', fieldName: 'productCode' , type: 'Text', hideDefaultActions: true, wrapText: true},
+    { label: 'Book', fieldName: 'proName', type: 'Text',hideDefaultActions: true, wrapText: true },
+   
+];
+
+const columns2 = [
+    { label: 'Code', fieldName: 'productCode' , type: 'Text', hideDefaultActions: true, wrapText: true},
+    { label: 'Book', fieldName: 'proName', type: 'Text',hideDefaultActions: true, wrapText: true },
+   
+];
+export default class AddBooksLWC extends LightningElement {
+
+    
+    noOfselectedBook = 0 ;
+    noOftotalBook = 0 ;
+    noOfRemainingBook = 0 ;
+    length1 = 0;
+    length2 = 0;
+    length3 = 0;
+    category = '';
+    category1 = '';
+    category2 = '';
+    v1 = false;
+    v2 = false;
+    v3 = false;
+    acountName = '';
+    @api recordId;
+    columns = columns;
+    columns1 = columns1;
+    columns2 = columns2;
+    data = [];
+    data1 = [];
+    data2 = [];
+    len;
+    Purchase_Location__c ;
+   Current_Publication__c;
+   Return_Yes_No__c;
+   Mobile_No__c;
+   Pracharya_Name__c;
+   Commision__c;
+   When_to_come__c;
+   Book_Issued_on__c;
+
+   
+
+
+    @track selectedRecords = [{
+       code:'',
+       books:'',
+   Purchase_Location__c:"",
+   Current_Publication__c:"",
+   Return_Yes_No__c:"",
+   Mobile_No__c:"",
+   Pracharya_Name__c:"",
+   Commision__c:"",
+   When_to_come__c:"",
+   Book_Issued_on__c:""
+}];
+
+@wire(CurrentPageReference)
+getStateParameters(currentPageReference) {
+if (currentPageReference) {
+    this.recordId = currentPageReference.state.recordId;
+  }
+}
+
+connectedCallback() {
+   
+    addBooks({VisitId :this.recordId})
+    .then(data =>{
+
+        this.acountName=data;
+    })
+    .catch(error =>{
+        console.log('error----');
+    })
+
+    getBooksLen()
+    .then(result => {
+        this.noOftotalBook = result;
+        this.noOfRemainingBook = this.noOftotalBook;
+
+       
+    })
+    .catch(error => {
+        
+    });
+    
+}
+handleFirstCancel(){
+    this.dispatchEvent(new CloseActionScreenEvent());
+}
+
+    
+   handle1(event) {
+    this.Purchase_Location__c = event.target.value;
+    console.log("Purchase_Location__c"+ this.Purchase_Location__c);
+   }
+   handle2(event) {
+    this.Current_Publication__c = event.target.value;
+    console.log("Current_Publication__c"+ this.Current_Publication__c);
+   }
+   handle3(event) {
+    this.Return_Yes_No__c = event.target.value;
+    console.log("Return_Yes_No__c"+ this.Return_Yes_No__c);
+   }
+   handle4(event) {
+    this.Mobile_No__c= event.target.value;
+    console.log("Mobile_No__c"+ this.Mobile_No__c);
+   }
+   handle5(event) {
+    this.Pracharya_Name__c = event.target.value;
+    console.log("Pracharya_Name__c"+ this.Pracharya_Name__c);
+   }
+   handle6(event) {
+    this.Commision__c = event.target.value;
+    console.log("Commision__c"+ this.Commision__c);
+   }
+   handle7(event) {
+    this.When_to_come__c= event.target.value;
+    console.log("When_to_come__c"+ this.When_to_come__c);
+   }
+   handle8(event) {
+    this.Book_Issued_on__c = event.target.value;
+    console.log("Book_Issued_on__c"+ this.Book_Issued_on__c);
+   }
+
+
+
+   
+
+    len;
+
+   
+
+    get options() {
+        return [
+             { label: 'None', value: 'None' },
+            { label: 'Navbodh Little Lamp', value: 'Navbodh Little Lamp' },
+            { label: 'Navbodh Teacher Manual', value: 'Navbodh Teacher Manual' },
+            { label: 'Navbodh Work Book Navbodh Teacher Manual', value: 'Navbodh Work Book Navbodh Teacher Manual' },
+        ];
+    }
+
+    get options1() {
+        return [
+            { label: 'None', value: 'None' },
+            { label: 'Navbodh Little Lamp', value: 'Navbodh Little Lamp' },
+            { label: 'Navbodh Teacher Manual', value: 'Navbodh Teacher Manual' },
+            { label: 'Navbodh Work Book Navbodh Teacher Manual', value: 'Navbodh Work Book Navbodh Teacher Manual' },
+        ];
+    }
+
+    get options2() {
+        return [
+             { label: 'None', value: 'None' },
+            { label: 'Navbodh Little Lamp', value: 'Navbodh Little Lamp' },
+            { label: 'Navbodh Teacher Manual', value: 'Navbodh Teacher Manual' },
+            { label: 'Navbodh Work Book Navbodh Teacher Manual', value: 'Navbodh Work Book Navbodh Teacher Manual' },
+        ];
+    }
+
+
+    
+   
+
+    toggleChoiceA(event) {
+        let buttonid = event.currentTarget.dataset.buttonid;
+        let currentsection = this.template.querySelector('[data-id="' + buttonid + '"]');
+        if (currentsection.className.search('slds-is-open') == -1) {
+            currentsection.className = 'slds-section slds-is-open';
+        } else {
+            currentsection.className = 'slds-section slds-is-close';
+        }
+    }
+
+    toggleChoiceB(event) {
+        let buttonid1 = event.currentTarget.dataset.buttonid1;
+        let currentsection1 = this.template.querySelector('[data-id1="' + buttonid1 + '"]');
+        if (currentsection1.className.search('slds-is-open') == -1) {
+            currentsection1.className = 'slds-section slds-is-open';
+        } else {
+            currentsection1.className = 'slds-section slds-is-close';
+        }
+    }
+
+    toggleChoiceC(event) {
+        let buttonid2 = event.currentTarget.dataset.buttonid2;
+        let currentsection2 = this.template.querySelector('[data-id2="' + buttonid2 + '"]');
+        if (currentsection2.className.search('slds-is-open') == -1) {
+            currentsection2.className = 'slds-section slds-is-open';
+        } else {
+            currentsection2.className = 'slds-section slds-is-close';
+        }
+    }
+
+     
+    handleChange(event) {
+        this.category = event.target.value;
+        console.log("C0-----------" + this.category);
+        this.onCategory(); 
+        
+        
+        if( this.category == "None"){
+            this.v1 = false;
+        }else{
+            this.v1 = true;
+        }
+    }
+    
+    onCategory() { 
+        
+        getBooks({ category: this.category })
+            .then(result => {
+                this.length1 = result.length;
+                this.data = result.map(value => {
+                    console.log(" this.length1----------------------"+ this.length1);
+                    
+                    return { ...value, productCode: value.ProductCode, proName: value.Name };
+                });
+    
+            })
+            .catch(error => {
+                console.log('error----');
+            });
+    }
+    
+    handleChange1(event) {
+        this.category1 = event.target.value;
+        console.log("C1-----------"+this.category1);
+        this.onCategory1();
+        
+        if( this.category1 == "None"){
+            this.v2 = false;
+        }else{
+            this.v2 = true;
+        }
+    }
+
+    onCategory1() { 
+        
+        getBooks({ category: this.category1 })
+            .then(result => {
+                this.length2 = result.length;
+                this.data1 = result.map(value => {
+                    console.log(" this.length2----------------------"+ this.length2);
+                    
+                    return { ...value, productCode: value.ProductCode, proName: value.Name };
+                });
+    
+            })
+            .catch(error => {
+                console.log('error----');
+            });
+    }
+
+    handleChange2(event) {
+        this.category2 = event.target.value;
+        console.log("C2-----------"+this.category2);
+        this.onCategory2();
+        
+        if( this.category2 == "None"){
+            this.v3 = false;
+        }else{
+            this.v3 = true;
+        }
+        
+    }
+    onCategory2() { 
+        
+        getBooks({ category: this.category2 })
+            .then(result => {
+                this.length3 = result.length;
+                this.data2 = result.map(value => {
+                    console.log(" this.length3----------------------"+ this.length3);
+                   
+                    return { ...value, productCode: value.ProductCode, proName: value.Name };
+                });
+    
+            })
+            .catch(error => {
+                console.log('error----');
+            });
+    }
+
+
+    @track selectedProductCount= 0;
+
+handleRowSelection(event) {
+    
+try {
+    console.log('event.detail' + event.detail.config.action);
+    this.selectedProductsIds=[];
+if (event.detail.config.action == 'rowSelect') {
+    const selectedRows = event.detail.selectedRows;
+    console.log('selectedRows1.....'+selectedRows);
+    console.log('selectedRows.Id ' + JSON.stringify(selectedRows));
+    const selectedRec = [];
+    const holdData = [...this.selectedRecords, ...selectedRows];
+    this.selectedRecords = [...new Set(holdData.map(({ Id }) => Id))].map(e => holdData.find(({ Id }) => Id == e));
+    console.log('selectedRecords :' + JSON.stringify(this.selectedRecords));
+} else if (event.detail.config.action == 'rowDeselect') {
+    let deselectedId = event.detail.config.value;
+    console.log('Removed selectedRecords Id :' + event.detail.config.value);
+    let recordIndex = this.selectedRecords.findIndex((record) => record.Id == deselectedId);
+    this.selectedRecords.splice(recordIndex, 1);
+    this.selectedRecords = [...this.selectedRecords];
+    console.log('Removed selectedRecords :' + JSON.stringify(this.selectedRecords));
+}
+
+
+this.selectedProductCount = this.selectedRecords.length;
+
+this.noOfselectedBook = this.selectedProductCount-1;
+if(this.noOfselectedBook == 0){
+    this.noOfRemainingBook = this.noOftotalBook;
+}else{
+    this.noOfRemainingBook = (this.noOftotalBook - this.noOfselectedBook);
+}
+
+console.log(' this.selectedProductCount.....'+ this.selectedProductCount);
+
+if (this.selectedProductCount > 0) {
+    var srNo = 1;
+    let baseURL = window.location.origin;
+    
+    this.selectedRecords.forEach(currentItem => {
+        this.selectedProductsIds.push(currentItem.Id);
+        currentItem.recordUrl = baseURL + '/' + currentItem.Id;
+        this.showNext = true;
+        currentItem.rowNumber = srNo;
+        srNo++;
+       
+            
+        
+
+    });
+
+} else {
+  //  this.showNext = false;
+    
+}
+console.log('Selected ID-----------'+this.selectedProductsIds);
+} catch (error) {
+    console.log(error); 
+}
+
+}
+
+
+// handleRowSelection1(event) {
+//     try {
+//         console.log('event.detail' + event.detail.config.action);
+//         this.selectedProductsIds1=[];
+//     if (event.detail.config.action == 'rowSelect') {
+//         const selectedRows = event.detail.selectedRows;
+//         console.log('selectedRows1.....'+selectedRows);
+//         console.log('selectedRows.Id ' + JSON.stringify(selectedRows));
+//         const selectedRec = [];
+//         const holdData = [...this.selectedRecords1, ...selectedRows];
+//         this.selectedRecords1 = [...new Set(holdData.map(({ Id }) => Id))].map(e => holdData.find(({ Id }) => Id == e));
+//         console.log('selectedRecords1 :' + JSON.stringify(this.selectedRecords1));
+//     } else if (event.detail.config.action == 'rowDeselect') {
+//         let deselectedId = event.detail.config.value;
+//         console.log('Removed selectedRecords1 Id :' + event.detail.config.value);
+//         let recordIndex = this.selectedRecords1.findIndex((record) => record.Id == deselectedId);
+//         this.selectedRecords1.splice(recordIndex, 1);
+//         this.selectedRecords1 = [...this.selectedRecords1];
+//         console.log('Removed selectedRecords1 :' + JSON.stringify(this.selectedRecords1));
+//     }
+//     this.selectedProductCount = this.selectedRecords1.length;
+//     console.log(' this.selectedProductCount.....'+ this.selectedProductCount);
+    
+//     if (this.selectedProductCount > 0) {
+//         var srNo = 1;
+//         let baseURL = window.location.origin;
+        
+//         this.selectedRecords1.forEach(currentItem => {
+//             this.selectedProductsIds1.push(currentItem.Id);
+//             currentItem.recordUrl = baseURL + '/' + currentItem.Id;
+//             this.showNext = true;
+//             currentItem.rowNumber = srNo;
+//             srNo++;
+           
+                
+            
+    
+//         });
+    
+//     } else {
+//       //  this.showNext = false;
+        
+//     }
+//     console.log('Selected ID-----------'+this.selectedProductsIds1);
+//     } catch (error) {
+//         console.log(error); 
+//     }
+    
+//     }
+
+    
+    
+// handleRowSelection2(event) {
+//     try {
+//         console.log('event.detail' + event.detail.config.action);
+//         this.selectedProductsIds2=[];
+//     if (event.detail.config.action == 'rowSelect') {
+//         const selectedRows = event.detail.selectedRows;
+//         console.log('selectedRows1.....'+selectedRows);
+//         console.log('selectedRows.Id ' + JSON.stringify(selectedRows));
+//         const selectedRec = [];
+//         const holdData = [...this.selectedRecords2, ...selectedRows];
+//         this.selectedRecords2 = [...new Set(holdData.map(({ Id }) => Id))].map(e => holdData.find(({ Id }) => Id == e));
+//         console.log('selectedRecords2 :' + JSON.stringify(this.selectedRecords2));
+//     } else if (event.detail.config.action == 'rowDeselect') {
+//         let deselectedId = event.detail.config.value;
+//         console.log('Removed selectedRecords2 Id :' + event.detail.config.value);
+//         let recordIndex = this.selectedRecords2.findIndex((record) => record.Id == deselectedId);
+//         this.selectedRecords2.splice(recordIndex, 1);
+//         this.selectedRecords2 = [...this.selectedRecords2];
+//         console.log('Removed selectedRecords2 :' + JSON.stringify(this.selectedRecords2));
+//     }
+//     this.selectedProductCount = this.selectedRecords2.length;
+//     console.log(' this.selectedProductCount.....'+ this.selectedProductCount);
+    
+//     if (this.selectedProductCount > 0) {
+//         var srNo = 1;
+//         let baseURL = window.location.origin;
+        
+//         this.selectedRecords2.forEach(currentItem => {
+//             this.selectedProductsIds2.push(currentItem.Id);
+//             currentItem.recordUrl = baseURL + '/' + currentItem.Id;
+//             this.showNext = true;
+//             currentItem.rowNumber = srNo;
+//             srNo++;
+           
+                
+            
+    
+//         });
+    
+//     } else {
+//       //  this.showNext = false;
+        
+//     }
+//     console.log('Selected ID-----------'+this.selectedProductsIds2);
+//     } catch (error) {
+//         console.log(error); 
+//     }
+    
+//     }
+    
+
+//     handleSaveAll(){
+//     handleSave();
+//     handleSave1();
+//     handleSave2();
+// }
+
+handleSave() {
+    try{
+    console.log("lopp started");
+    var i = 0;
+    for(i = 0; i<8; i++){
+    console.log("lopp inside");
+
+        this.selectedRecords[i].Purchase_Location__c = this.Purchase_Location__c;
+        this.selectedRecords[i].Current_Publication__c = this.Current_Publication__c;
+        this.selectedRecords[i].Return_Yes_No__c =this.Return_Yes_No__c;
+
+    
+        this.selectedRecords[i].Mobile_No__c=this.Mobile_No__c;
+    
+        this.selectedRecords[i].Pracharya_Name__c=this.Pracharya_Name__c;
+    
+        this.selectedRecords[i].Commision__c=this.Commision__c;
+    
+        this.selectedRecords[i].When_to_come__c=this.When_to_come__c;
+    
+        this.selectedRecords[i].Book_Issued_on__c=this.Book_Issued_on__c;
+        
+        console.log("lopp ended" + i);
+    
+    }
+}catch(Exception){
+    console.log("error::::"+Exception);
+}
+    
+
+    let lastIndex = this.selectedRecords.length;
+    let bypass = false;
+    console.log(" Selected data ---------------------" +JSON.stringify(this.selectedRecords) );
+   // console.log('this.selectedRecords.Name...' + this.selectedRecords.Name);
+    //console.log('this.selectedRecords.ListPrice...' + this.selectedRecords.List_Price__c);
+    // for (let i = 0; i < lastIndex; i++) {
+    //     let rowNumber = i + 1;
+    //     if (this.selectedRecords[i].Quantity == null || this.selectedRecords[i].Quantity == '') {
+    //         this.toastEvent('error', 'Error!', 'Please fill Quantity at row number .' + rowNumber);
+    //         bypass = true;
+    //         break;
+    //     }
+       
+    // }
+    console.log('save data' + JSON.stringify(this.selectedRecords));
+    if (!bypass) {
+        this.isLoading = true;
+        console.log('12436---------------------' + this.recordId);
+        addOrderProducts({ jsObjoppLineItems: JSON.stringify(this.selectedRecords), VisitId: this.recordId })
+            .then((result) => {
+                if (result = 'success') {
+                    this.isLoading = false;
+    
+                    this.dispatchEvent(new ShowToastEvent({
+                        title: 'Success',
+                        message: "Record Save Successfully",
+                        variant: 'success'
+    
+                    }),
+                    );
+                   
+                    this.dispatchEvent(new CloseActionScreenEvent());
+    
+    
+                    //refreshApex(this.fetchQuoteLineItem);
+                }
+    
+               
+            })
+            .catch(error => {
+                this.isLoading = false;
+                console.log("Error : " + JSON.stringify(error));
+                    this.dispatchEvent(new ShowToastEvent({
+                                title : 'Error',
+                                message :JSON.stringify(error.body.message),
+                                variant : 'error'
+    
+                            }),
+                            );
+            })
+    }
+    }
+
+
+
+} 
+
+
+Class-------------------------------------------------
+public with sharing class AddBooksController {
+    @AuraEnabled
+    public static String addBooks(string VisitId){
+        system.debug('id '+VisitId);
+        list<Visits__c> lstOfVisit= [select id, Account__c, Account__r.Name from Visits__c where id =:VisitId];
+        system.debug('name= '+lstOfVisit[0].Account__r.Name);
+        return lstOfVisit[0].Account__r.Name;
+    }
+    
+    @AuraEnabled
+    public static List<Product2> getBooks(String category) {
+        system.debug('Category Data-----'+[SELECT ProductCode, Name FROM Product2 WHERE Family = :category] );
+        return [SELECT ProductCode, Name FROM Product2 WHERE Family = :category];
+    }
+    
+   
+    @AuraEnabled
+    public static Integer getBooksLen() {
+        Integer len = [SELECT COUNT() FROM Product2 WHERE Family != Null];
+        return len;
+    }
+
+
+    
+    
+@AuraEnabled
+public static String addOrderProducts(String jsObjoppLineItems, String VisitId) {
+    
+    try {
+        system.debug('VisitId'+ VisitId);
+        system.debug('jsObjoppLineItems'+ JSON.deserializeUntyped(jsObjoppLineItems));
+        if (jsObjoppLineItems != null && jsObjoppLineItems != '' && VisitId != null && VisitId != '') {
+            list<object> lstoppLineItems = (list<object>) JSON.deserializeUntyped(jsObjoppLineItems);
+          //  
+//system.debug(m);
+          //  List<productWrapper> lstOppLineItemWrapper = (List<productWrapper>) JSON.deserialize(jsObjoppLineItems, List<productWrapper>.class);
+            List<Book_Items__c> lstOppLineItem = new List<Book_Items__c>();
+
+            for (Object objOLIWrap : lstoppLineItems) {
+                system.debug(string.valueOf(objOLIWrap));
+                Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(objOLIWrap));
+                system.debug(m);
+              if (m.get('Id') != null && m.get('Id') != '') {
+                    Book_Items__c bookLI = new Book_Items__c();
+                    bookLI.Visit_Order__c = VisitId;
+                    bookLI.Book_Name__c =  string.valueOf(m.get('Name') );
+                    bookLI.Name = string.valueOf(m.get('productCode'));
+                  	bookLI.Purchase_Location__c = string.valueOf(m.get('Purchase_Location__c'));
+                  bookLI.Current_Publication__c = string.valueOf(m.get('Current_Publication__c'));
+                  bookLI.Return_Yes_No__c = string.valueOf(m.get('Return_Yes_No__c'));
+                  bookLI.Mobile_No__c = string.valueOf(m.get('Mobile_No__c'));
+                  bookLI.Pracharya_Name__c = string.valueOf(m.get('Pracharya_Name__c'));
+                  bookLI.Commision__c = string.valueOf(m.get('Commision__c'));
+                  bookLI.When_to_come__c = string.valueOf(m.get('When_to_come__c'));
+                  bookLI.Book_Issued_on__c = string.valueOf(m.get('Book_Issued_on__c'));
+                  
+                  
+                    lstOppLineItem.add(bookLI);
+                  system.debug('lstOppLineItem::::'+lstOppLineItem);
+              }
+                
+            }
+
+            if (!lstOppLineItem.isEmpty()) {
+                insert lstOppLineItem;
+                return 'success';
+            }
+        }
+        return 'error';
+    } catch (Exception e) {
+        throw new AuraHandledException(e.getMessage());
+    }
+}
+    
+}
+
+
+Aura call-------------------------------------
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<c:addBooksLWC aura:id="lWCComponent2"></c:addBooksLWC>
+</aura:component>
